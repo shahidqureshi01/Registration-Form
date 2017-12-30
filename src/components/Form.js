@@ -11,7 +11,41 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
   </div>
 )
 
+const renderAccounts = ({ fields, meta: { error, submitFailed } }) => (
+  <ul>
+    <li>
+      <button type="button" onClick={() => fields.push({})}>
+        Add bank account
+      </button>
+      {submitFailed && error && <span>{error}</span>}
+    </li>
+    {fields.map((account, index) => (
+      <li key={index}>
+        <button
+          type="button"
+          title="Remove account"
+          onClick={() => fields.remove(index)}
+        />
+        <h4>Account #{index + 1}</h4>
+        <Field
+          name={`${account}.IBAN`}
+          type="text"
+          component={renderField}
+          label="IBAN"
+        />
+        <Field
+          name={`${account}.bankName`}
+          type="text"
+          component={renderField}
+          label="Bank name"
+        />
+      </li>
+    ))}
+  </ul>
+)
+
 const validate = values => {
+  console.log('validate', values)
   const errors = {}
   if (!values.firstName) {
     errors.firstName = 'First name Required'
@@ -41,6 +75,8 @@ const Form = (props) => {
       <Field name="firstName" type="text" component={renderField} label="First Name"/>
       <Field name="lastName" type="text" component={renderField} label="Last Name"/>
       <Field name="email" type="email" component={renderField} label="Email"/>
+      <h3>Bank accounts</h3>
+      <FieldArray name="accounts" component={renderAccounts} />
       <div>
         <button type="submit" disabled={submitting}>Submit</button>
       </div>
