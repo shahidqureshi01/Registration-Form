@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Form from './components/Form'
 import './App.css';
 
 class App extends Component {
@@ -9,7 +10,7 @@ class App extends Component {
           <h1 className="App-title">Registration form</h1>
         </header>
         <div className="App-intro">
-          
+          <Form />
         </div>
       </div>
     );
