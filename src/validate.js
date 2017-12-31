@@ -1,10 +1,10 @@
 import iban from 'iban'
 
 const validate = values => {
-  console.log('validate', values)
+  //console.log('validate', values)
   const errors = {}
   if (!values.firstName) {
-    errors.firstName = 'First name Required'
+    errors.firstName = 'First name is Required'
   } else if (!/^[a-zA-Z]*$/g.test(values.firstName)) {
     errors.firstName = 'Only characters are allowed'
   }
