@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form'
+import validate from '../validate'
 
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
   <div>
@@ -44,27 +45,6 @@ const renderAccounts = ({ fields, meta: { error, submitFailed } }) => (
   </ul>
 )
 
-const validate = values => {
-  console.log('validate', values)
-  const errors = {}
-  if (!values.firstName) {
-    errors.firstName = 'First name Required'
-  } else if (!/^[a-zA-Z]*$/g.test(values.firstName)) {
-    errors.firstName = 'Only characters are allowed'
-  }
-  if (!values.lastName) {
-    errors.lastName = 'Last name is Required'
-  } else if (!/^[A-Z]*$/i.test(values.lastName)) {
-    errors.firstName = 'Only characters are allowed'
-  }
-  if (!values.email) {
-    errors.email = 'Email is Required'
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-
-  return errors
-}
 
 const Form = (props) => {
   console.log('propsy', props)
